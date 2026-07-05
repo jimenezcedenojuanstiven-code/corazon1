@@ -1,0 +1,162 @@
+/* Reseteo básico de la pantalla */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cambiada a una fuente más elegante */
+}
+
+/* Posicionamiento del lienzo */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: filter 0.5s ease; /* Permite suavizar el fondo cuando sale el mensaje */
+}
+
+/* Desenfoque del corazón cuando el mensaje está activo */
+canvas.blur-effect {
+    filter: brightness(0.4) blur(2px);
+}
+
+/* Estilo para el texto superior con brillo de neón azul */
+.title {
+    position: absolute;
+    top: 8%;
+    z-index: 2;
+    color: #a3daff;
+    font-size: 2.3rem;
+    font-style: italic;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 162, 255, 0.8);
+    user-select: none;
+}
+
+/* Estilo del Botón Central Interactivo (Ahora más pequeño y compacto) */
+#actionBtn {
+    position: absolute;
+    z-index: 3;
+    padding: 8px 18px; /* Reducido para que sea más compacto */
+    font-size: 0.95rem; /* Letra un poco más pequeña y estilizada */
+    font-weight: bold;
+    color: #ffffff;
+    background: rgba(0, 162, 255, 0.15);
+    border: 1.5px solid #00a2ff; /* Borde más fino */
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 162, 255, 0.3);
+    transition: all 0.4s ease;
+    letter-spacing: 0.5px;
+}
+
+#actionBtn:hover {
+    background: rgba(0, 162, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.7);
+    transform: scale(1.03);
+}
+
+#actionBtn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+    position: absolute;
+}
+
+#actionBtn.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+/* NUEVO: Diseño de la tarjeta del Mensaje Romántico */
+#secretMessage {
+    position: absolute;
+    z-index: 4;
+    width: 90%;
+    max-width: 450px;
+    padding: 30px;
+    background: rgba(5, 15, 25, 0.85); /* Fondo oscuro cristalino */
+    border: 1px solid rgba(0, 162, 255, 0.5);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 162, 255, 0.2);
+    backdrop-filter: blur(10px); /* Efecto vidrio esmerilado moderno */
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Estilos de los párrafos interiores para máxima legibilidad */
+.text-main {
+    color: #e0f2fe;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.text-highlight {
+    color: #38bdf8;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+.text-sub {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+/* Botón de cierre interno */
+#closeBtn {
+    background: transparent;
+    border: none;
+    color: #38bdf8;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+#closeBtn:hover {
+    color: #f43f5e; /* Cambia a un tono rosa/rojo pasional al pasar el mouse */
+}
+
+/* Clases de animación para el Mensaje */
+.hidden-message {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+    pointer-events: none;
+}
+
+.visible-message {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+/* Esto ajusta el texto automáticamente si el celular es pequeño */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.6rem; /* Letra un poco más pequeña en móviles */
+        top: 15%; /* Lo baja un poquito más para que no choque con la cámara frontal */
+    }
+    #secretMessage {
+        width: 95%; /* Ocupa casi todo el ancho en el celular para que se lea mejor */
+        padding: 20px;
+    }
+    .text-main {
+        font-size: 1.1rem;
+    }
+}
